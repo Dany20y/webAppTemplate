@@ -1,19 +1,154 @@
-﻿body {
-    padding-top: 50px;
+﻿/* --- NAVBAR STYLES ---*/
+.navbar-background {
+    background-image: url('../Assets/navbar.jpg') !important;
+}
+
+.with-blur-backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    padding: 0px 10px;
+    border-radius: 15px;
+}
+
+.navbar-brand {
+    text-align: center;
+    font-size: 34px;
+    color: #f4f1de;
+    font:'saira-semi-condensed-bold';
+    transition-duration: 0.4s;
+}
+
+    .navbar-brand:hover {
+        color: #9799ca;
+    }
+
+.nav-link {
+    color: #f4f1de;
+    font: 'saira-semi-condensed-bold';
+    font-size: 18px;
+    padding: 24px;
+    margin: 0px;
+    transition: 0.4s;
+}
+
+.nav-link:hover{
+    color:#9799ca;
+}
+
+.nav-item-style {
+    color: #f4f1de;
+    font: 'saira-semi-condensed-bold';
+    background: none;
+    transition: 0.4s;
+}
+
+/* --- BODY STYLE --- */
+body {
     padding-bottom: 20px;
-    background-color: #0af125;
+    background-color: #0a122a !important;
+    font-family: 'Saira Semi Condensed';
+    font-size: inherit;
+    font-palette: dark;
+    color: #f4f1de;
 }
 
-/* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    margin-top: 5%;
+    padding: 15px;
+    border: solid #9799ca 3px;
+    border-radius: 5px 5px 0px 0px;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
+hr {
+    border: solid #9799ca 2px;
+}
+
 input,
 select,
 textarea {
     max-width: 280px;
 }
 
+/* --- FOOTER STYLE --- */
+.footer-bg {
+    margin-top: 24px;
+}
+
+p {
+    margin: 25px;
+    padding: 15px;
+}
+
+/* --- IMAGE STYLES --- */
+.img-logo {
+    height: 44px;
+    transition-duration: 0.4s;
+}
+
+.img-logo:hover{
+    height: 54px;
+}
+
+/* --- BUTTONS --- */
+button {
+    height:inherit;
+    border: none;
+    background: none;
+
+}
+
+/* --- TEXT STYLES --- */
+.saira-semi-condensed-thin {
+    font-family: "Saira Semi Condensed", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+}
+
+.saira-semi-condensed-extralight {
+    font-family: "Saira Semi Condensed", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+}
+
+.saira-semi-condensed-light {
+    font-family: "Saira Semi Condensed", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.saira-semi-condensed-regular {
+    font-family: "Saira Semi Condensed", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.saira-semi-condensed-medium {
+    font-family: "Saira Semi Condensed", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.saira-semi-condensed-semibold {
+    font-family: "Saira Semi Condensed", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.saira-semi-condensed-bold {
+    font-family: "Saira Semi Condensed", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.saira-semi-condensed-extrabold {
+    font-family: "Saira Semi Condensed", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+}
+
+.saira-semi-condensed-black {
+    font-family: "Saira Semi Condensed", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+}
