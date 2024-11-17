@@ -1,63 +1,89 @@
 ﻿/* --- NAVBAR STYLES ---*/
-.navbar-background {
-    background-image: url('../Assets/navbar.jpg') !important;
+/* Navbar container styling for 80% width */
+.container-custom {
+    width: 80%;
+    margin: 0 auto;
+    max-width: 1800px; /* Optional: limits the max width on larger screens */
 }
 
-.with-blur-backdrop {
-    background-color: rgba(0, 0, 0, 0.4);
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
-    padding: 0px 10px;
-    border-radius: 15px;
+/* Other existing styles */
+.navbar {
+    background: white;
+    padding: 1rem 0;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1030;
+}
+
+.navbar-background {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
 }
 
 .navbar-brand {
-    text-align: center;
-    font-size: 34px;
-    color: #f4f1de;
-    font:'saira-semi-condensed-bold';
-    transition-duration: 0.4s;
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    color: black;
+    text-decoration: none;
 }
 
-    .navbar-brand:hover {
-        color: #9799ca;
+    .navbar-brand .img-logo {
+        height: 30px;
+        margin-right: 0.5rem;
+    }
+
+    .navbar-brand .brand-name {
+        font-weight: bold;
+        color: black;
     }
 
 .nav-link {
-    color: #f4f1de;
-    font: 'saira-semi-condensed-bold';
-    font-size: 18px;
-    padding: 24px;
-    margin: 0px;
-    transition: 0.4s;
+    color: black !important;
+    font-weight: 500;
 }
 
-.nav-link:hover{
-    color:#9799ca;
+.navbar-nav .nav-item .nav-link:hover {
+    color: #333 !important;
+    text-decoration: none;
 }
 
-.nav-item-style {
-    color: #f4f1de;
-    font: 'saira-semi-condensed-bold';
-    background: none;
-    transition: 0.4s;
+.btn-dark {
+    color: white !important;
+    background-color: black !important;
+    border: none;
+    transition: background-color 0.2s ease;
 }
+
+    .btn-dark:hover {
+        background-color: #333 !important;
+    }
+
+.rounded-pill {
+    border-radius: 30px;
+    font-weight: bold;
+}
+
+.navbar-nav {
+    gap: 1rem;
+}
+
 
 /* --- BODY STYLE --- */
 body {
-    padding-bottom: 20px;
-    background-color: #0a122a !important;
+    padding: 0% 10%;
+    height : auto;
+    background-color: #fff !important;
     font-family: 'Saira Semi Condensed';
     font-size: inherit;
     font-palette: dark;
-    color: #f4f1de;
+    color: #000;
+    justify-content: center;
+    align-items: center;
 }
 
 .body-content {
-    margin-top: 5%;
-    padding: 15px;
-    border: solid #9799ca 3px;
-    border-radius: 5px 5px 0px 0px;
+    margin-top: 6%;
 }
 
 hr {
@@ -73,6 +99,7 @@ textarea {
 /* --- FOOTER STYLE --- */
 .footer-bg {
     margin-top: 24px;
+    text-align: center;
 }
 
 p {
@@ -84,6 +111,7 @@ p {
 .img-logo {
     height: 44px;
     transition-duration: 0.4s;
+    color : white;
 }
 
 .img-logo:hover{
@@ -97,6 +125,17 @@ button {
     background: none;
 
 }
+
+/* --- SPINNER ---*/
+#spinner {
+    z-index: 1050; /* Ensure it appears on top */
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth hide transition */
+}
+
+    #spinner.hide {
+        opacity: 0;
+        visibility: hidden;
+    }
 
 /* --- TEXT STYLES --- */
 .saira-semi-condensed-thin {
@@ -152,3 +191,51 @@ button {
     font-weight: 900;
     font-style: normal;
 }
+
+
+/* --- LOG IN PAGE STYLE --- */
+.login-body {
+    height: 100%;
+    border-radius: 15px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.login-container {
+    display: flex;
+    height: 100%;
+}
+
+.login-left {
+    flex: 1;
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px 0px 0px 15px;
+}
+
+.login-right {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 0px 15px 15px 0px;
+}
+
+.login-logo img {
+    height: 50px;
+}
+
+form {
+    max-width: 400px;
+    width: 100%;
+}
+
+
+.btn-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .btn-social img {
+        height: 20px;
+        margin-right: 10px;
+    }

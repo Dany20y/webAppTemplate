@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "Log in";
+}
+
+<div class="login-body">
+    <div class="login-container d-flex">
+        <!-- Left Section with Background Image -->
+        <div class="login-left" id="loginLeft"></div>
+
+        <!-- Right Section with Form -->
+        <div class="login-right d-flex flex-column justify-content-center align-items-center">
+            <div class="text-center">
+                <!-- Logo and Welcome Text -->
+                <div class="login-logo mb-4">
+                    <img src="~/Assets/Logos/B-logo.png" alt="Logo">
+                    <h3>Bondroy</h3>
+                </div>
+                <h5>Welcome back!</h5>
+            </div>
+
+            <!-- Login Form -->
+            <form method="post" class="mt-4 w-100">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" class="form-control" placeholder="name@email.com" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="Password" required>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <input type="checkbox" id="remember" class="me-1">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <a href="#" class="text-decoration-none">Reset password</a>
+                </div>
+                <button type="submit" class="btn btn-dark w-100 mb-3">Log in</button>
+                <p class="text-center mb-0">
+                    Don’t have an account? <a href="#" class="text-primary text-decoration-none">Sign up</a>
+                </p>
+            </form>
+
+            <!-- Social Login -->
+            <hr class="my-4">
+            <p class="text-center">or</p>
+
+            <div class="d-grid gap-3 w-50">
+                <button class="btn btn-outline-dark btn-social">
+                    <img src="~/Assets/Logos/google.png" alt="Google">
+                    Continue with Google
+                </button>
+                <button class="btn btn-outline-dark btn-social">
+                    <img src="~/Assets/Logos/twitter.png" alt="Twitter">
+                    Continue with Twitter
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript to randomly select a background image
+    const images = [
+        "../Assets/log-in-1.jpg",
+        "../Assets/log-in-2.jpg",
+        "../Assets/log-in-3.jpg",
+        "../Assets/log-in-4.jpg"
+    ];
+
+    // Select a random image
+    const randomImage = images[Math.floor(Math.random() * images.length)];
+
+    // Set the random image as the background for the left section
+    document.getElementById('loginLeft').style.backgroundImage = `url('${randomImage}')`;
+</script>

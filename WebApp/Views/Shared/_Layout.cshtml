@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     @Styles.Render("~/bundles/styles")
-    <script></script>
+
     @if (IsSectionDefined("Styles"))
     {
         @RenderSection("Styles", required: false)
@@ -19,15 +19,30 @@
 </head>
 
 <body>
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <img src="~/Assets/pedro-raccoon.gif" alt="Loading..." class="loading-gif" />
+    </div>
     @Html.Partial("_Navbar")
 
-    <div class="container body-content">
+    <div class="body-content">
         @RenderBody()
-        <hr />
     </div>
     <div class="footer-bg">
         @Html.Partial("_Footer")
     </div>
+
+    <script>
+        // Wait for the DOM content to load
+        document.addEventListener("DOMContentLoaded", function () {
+            const spinner = document.getElementById("spinner");
+
+            // Add a listener for the window load event
+            window.addEventListener("load", function () {
+                // Hide the spinner after page load
+                spinner.classList.add("hide");
+            });
+        });
+    </script>
 
     @Scripts.Render("~/bundles/scripts")
     @RenderSection("scripts", required: false)

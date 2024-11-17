@@ -1,10 +1,7 @@
-﻿<nav class="nav navbar  navbar-expand-lg fixed-top navbar-background">
-    <div class="container align-bottom with-blur-backdrop">
-        <button class="icon-link navbar-brand">
-            <img src="~/Assets/B-logo.png" class="img-logo" />
-            @Html.ActionLink("Bussy", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-        </button>
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+﻿<nav class="navbar fixed-top navbar-expand-lg navbar-background">
+    <div class="container-custom d-flex justify-content-between align-items-center">
+        <!-- Left Links -->
+        <ul class="navbar-nav d-flex flex-row gap-3">
             <li class="nav-item">
                 @Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link" })
             </li>
@@ -14,8 +11,21 @@
             <li class="nav-item">
                 @Html.ActionLink("Contact", "Index", "Home", new { @class = "nav-link" })
             </li>
+        </ul>
+
+        <!-- Centered Logo -->
+        <a class="navbar-brand mx-auto" href="@Url.Action("Index", "Home")">
+            @*<img src="~/Assets/B-logo.png" alt="Logo" class="img-logo" />*@
+            <span class="brand-name">Bussy</span>
+        </a>
+
+        <!-- Right Links -->
+        <ul class="navbar-nav d-flex flex-row gap-3">
             <li class="nav-item">
-                @Html.ActionLink("Sign in", "Index", "Home", new { @class = "nav-link" })
+                @Html.ActionLink("Sign in", "Index", "SignIn", null, new { @class = "nav-link" })
+            </li>
+            <li>
+                @Html.ActionLink("Log in", "Index", "LogIn", null, new { @class = "nav-link" })
             </li>
         </ul>
     </div>
