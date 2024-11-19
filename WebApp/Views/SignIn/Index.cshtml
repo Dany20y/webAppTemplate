@@ -1,0 +1,65 @@
+﻿@model WebApp.Models.SingInUser
+
+@{
+    ViewBag.Title = "Sign In";
+}
+
+<div class="login-body">
+    <div class="login-container d-flex">
+        <!-- Left Section with Form -->
+        <div class="login-left d-flex flex-column justify-content-center align-items-center">
+            <div class="text-center">
+                <!-- Logo and Welcome Text -->
+                <div class="login-logo mb-4">
+                    <img src="~/Assets/Logos/B-logo.png" alt="Logo">
+                    <h3>Bondroy</h3>
+                </div>
+                <h5>Join us today!</h5>
+            </div>
+
+            <!-- Sign Up Form -->
+            @using (Html.BeginForm("Index", "SignIn", FormMethod.Post, new { @class = "mt-4 w-100" }))
+            {
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Username, new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.Username, new { @class = "form-control", @placeholder = "Username", @required = "required" })
+                </div>
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Email, new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @type = "email", @placeholder = "name@email.com", @required = "required" })
+                </div>
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Password, new { @class = "form-label" })
+                    @Html.PasswordFor(model => model.Password, new { @class = "form-control", @placeholder = "Password", @required = "required" })
+                </div>
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Confirm_Password, new { @class = "form-label" })
+                    @Html.PasswordFor(model => model.Confirm_Password, new { @class = "form-control", @placeholder = "Confirm Password", @required = "required" })
+                </div>
+                <button type="submit" class="btn btn-dark w-100 mb-3">Sign In</button>
+                <p class="text-center mb-0">
+                    Already have an account? <a href="@Url.Action("Index", "LogIn")" class="text-primary text-decoration-none">Log in</a>
+                </p>
+            }
+        </div>
+
+        <!-- Right Section with Background Image -->
+        <div class="login-right" id="loginRight"></div>
+    </div>
+</div>
+
+<script>
+    // JavaScript to randomly select a background image
+    const images = [
+        "../Assets/log-in-1.jpg",
+        "../Assets/log-in-2.jpg",
+        "../Assets/log-in-3.jpg",
+        "../Assets/log-in-4.jpg"
+    ];
+
+    // Select a random image
+    const randomImage = images[Math.floor(Math.random() * images.length)];
+
+    // Set the random image as the background for the right section
+    document.getElementById('loginRight').style.backgroundImage = `url('${randomImage}')`;
+</script>
