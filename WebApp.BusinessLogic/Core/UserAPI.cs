@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Web;
 using WebApp.BusinessLogic.DBModel;
+using WebApp.Domain.Entities.Comp;
 using WebApp.Domain.Entities.DatabaseTables;
 using WebApp.Domain.Entities.Enums;
 using WebApp.Domain.Entities.Response;
@@ -88,6 +89,10 @@ namespace WebApp.BusinessLogic.Core
                 return new ActionStatus { IsSuccess = false, StatusMessage = $"An error occurred: {ex.Message}", SessionKey = "" };
             }
            
+        }
+        public List<CoCard> GetCoCards()
+        {
+            return GetAllCards();
         }
     }
 }

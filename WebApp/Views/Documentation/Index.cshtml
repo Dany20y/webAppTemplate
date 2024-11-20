@@ -3,5 +3,20 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h3>Documentation</h3>
 
+<div class="card-container">
+    @foreach (var card in Model)
+    {
+        <div class="card">
+            <div class="card-image">
+                <img src="@card.ImageUrl" alt="@card.Title">
+            </div>
+            <div class="card-content">
+                <h3>@card.Title</h3>
+                <p>@card.Description</p>
+                <a href="@card.FileUrl" download class="btn-download">Download</a>
+            </div>
+        </div>
+    }
+</div>
