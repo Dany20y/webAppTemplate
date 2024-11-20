@@ -10,7 +10,7 @@ namespace WebApp.BusinessLogic.DBModel
     public class UserContext : DbContext
     {
         public UserContext() :
-        base ("name = Student_Help_DB")
+        base ("name = Dani")
         {
         }
         public virtual DbSet<UserDBTable> Users_Table {  get; set; }
