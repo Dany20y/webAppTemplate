@@ -235,6 +235,7 @@
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Views\Abbreviation\Index.cshtml" />
+    <Content Include="Views\Documentation\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -244,7 +245,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Documentation\" />
     <Folder Include="Views\Template\" />
     <Folder Include="Views\Updates\" />
   </ItemGroup>
