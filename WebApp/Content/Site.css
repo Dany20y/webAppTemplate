@@ -68,6 +68,14 @@
     gap: 1rem;
 }
 
+.navbar .form-control {
+    width: 200px; /* Lățimea search box-ului */
+}
+
+.navbar .btn {
+    margin-left: 10px; /* Spațiere între search box și buton */
+}
+
 
 /* --- BODY STYLE --- */
 body {
@@ -239,3 +247,19 @@ form {
         height: 20px;
         margin-right: 10px;
     }
+
+
+.abbreviation-container {
+    display: block;
+    line-height: 1.8em; /* Spațiere între rânduri */
+    font-size: 16px;
+    white-space: nowrap; /* Previne trecerea pe rânduri multiple */
+}
+
+    .abbreviation-container span {
+        display: inline-block; /* Pentru aliniere frumoasă a fiecărui element */
+        margin-bottom: 5px;
+    }
+
+    
+

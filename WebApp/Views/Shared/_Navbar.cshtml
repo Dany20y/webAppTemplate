@@ -3,21 +3,27 @@
         <!-- Left Links -->
         <ul class="navbar-nav d-flex flex-row gap-3">
             <li class="nav-item">
-                @Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link" })
+                @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
             </li>
             <li class="nav-item">
-                @Html.ActionLink("About", "Index", "Home", new { @class = "nav-link" })
+                @Html.ActionLink("Updates", "Index", "Updates", null, new { @class = "nav-link" })
             </li>
             <li class="nav-item">
-                @Html.ActionLink("Contact", "Index", "Home", new { @class = "nav-link" })
+                @Html.ActionLink("Documentation", "Index", "Documentation", null, new { @class = "nav-link" })
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("Abbrevation", "Index", "Abbreviation", null, new { @class = "nav-link" })
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("Template", "Index", "Template", null, new { @class = "nav-link" })
             </li>
         </ul>
 
-        <!-- Centered Logo -->
-        <a class="navbar-brand mx-auto" href="@Url.Action("Index", "Home")">
-            @*<img src="~/Assets/B-logo.png" alt="Logo" class="img-logo" />*@
-            <span class="brand-name">Bussy</span>
-        </a>
+        <!-- Search Box -->
+        <form class="d-flex" method="get" action="/Search">
+            <input class="form-control me-2" type="search" name="q" placeholder="Search..." aria-label="Search">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form>
 
         <!-- Right Links -->
         <ul class="navbar-nav d-flex flex-row gap-3">
