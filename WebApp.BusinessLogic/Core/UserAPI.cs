@@ -92,53 +92,26 @@ namespace WebApp.BusinessLogic.Core
             }
            
         }
-        public List<CoCard> GetAllCards()
+        public List<CoCard> GetCoCards()
         {
             using (var dbContext = new CardContext())
             {
-                var car =  dbContext.Card_Table.ToListAsync();
-                var card = Mapper.Map<List<CoCard>>(car);
+                // Preluăm toate cardurile din baza de date
+                var cardEntities = dbContext.Card_Table.ToList();
 
-                return card;
+                // Mapăm entitățile din baza de date în modelul aplicației
+                var cards = cardEntities.Select(c => new CoCard
+                {
+                    id = c.id,
+                    title = c.title,
+                    description = c.description,
+                    img = !string.IsNullOrEmpty(c.img) ? c.img : "/images/default.png", // Folosește imaginea implicită dacă img este null sau gol
+                    pdf_file = c.pdf_file // Presupunem că este un URL sau cale către fișier
+                }).ToList();
+
+                return cards;
             }
         }
-        public ActionStatus AddManualCard()
-        {
-            try
-            {
-                // Creează manual datele pentru card
-                var newCard = new CoCardDBTable
-                {
-                    title = "Sample Card",
-                    description = "This is a manually added card.",
-                    img = System.IO.File.ReadAllBytes("C:\\Users\\danie\\andre\\WebApp\\Assets\\log-in-3.jpg"), // Înlocuiește cu calea imaginii
-                };
-
-                using (var dbContext = new CardContext())
-                {
-                    dbContext.Card_Table.Add(newCard); // Adaugă cardul în baza de date
-                    dbContext.SaveChanges(); // Salvează modificările
-                }
-
-                return new ActionStatus
-                {
-                    IsSuccess = true,
-                    StatusMessage = "Card added successfully!",
-                    SessionKey = ""
-                };
-            }
-            catch (Exception ex)
-            {
-                return new ActionStatus
-                {
-                    IsSuccess = false,
-                    StatusMessage = $"An error occurred: {ex.Message}",
-                    SessionKey = ""
-                };
-            }
-        }
-
-
 
     }
 }

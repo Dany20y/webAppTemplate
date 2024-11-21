@@ -1,18 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
 using WebApp.Domain.Entities.DatabaseTables;
 
 namespace WebApp.BusinessLogic.DBModel
 {
     public class CardContext : DbContext
     {
-        public CardContext() :
-        base("name = Dani")
+        public CardContext() : base("name=Dani")
         {
         }
-        public virtual DbSet<CoCardDBTable> Card_Table { get; set; }
+
+        public DbSet<CoCardDBTable> Card_Table { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CoCardDBTable>().ToTable("CoCardDBTables"); // Maparea corectă a tabelului
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

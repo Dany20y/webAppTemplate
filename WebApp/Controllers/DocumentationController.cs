@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using WebApp.BusinessLogic.Core;
 using WebApp.BusinessLogic.Interfaces;
+using WebApp.Domain.Entities.Comp;
+using WebApp.Models;
 
 namespace WebApp.Controllers
 {
@@ -27,10 +29,19 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult Cards()
         {
-            // Preia toate cardurile din baza de date
-            var cards = _session.GetCoCards();
-            return View(cards);
+            var userAPI = new UserAPI();
+            var cards = userAPI.GetCoCards();
+
+            if (cards == null || !cards.Any())
+            {
+                ViewBag.Message = "No cards available to display.";
+                return View(new List<CompCard>()); // Trimite un model gol dacă nu există date
+            }
+
+            return View(cards); // Transmite modelul către view
         }
+
+
 
     }
 

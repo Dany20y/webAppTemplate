@@ -10,7 +10,6 @@ namespace WebApp.Domain.Entities.DatabaseTables
     public class CoCardDBTable
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
 
         [Required]
@@ -21,9 +20,9 @@ namespace WebApp.Domain.Entities.DatabaseTables
         public string description { get; set; }
 
         [Display(Name = "Image")]
-        public byte[] img { get; set; }
+        public string img { get; set; }
 
         [Display(Name = "Pdf File")]
-        public byte[] pdf_file { get; set; }
+        public string pdf_file { get; set; }
     }
 }

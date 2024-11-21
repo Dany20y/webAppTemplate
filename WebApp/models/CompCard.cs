@@ -10,7 +10,7 @@ namespace WebApp.Models
         public int id { get; set; }
         public string title { get; set; }
         public string description { get; set; }
-        public byte[] img { get; set; }
-        public byte[] pdf_file { get; set; }
+        public string img { get; set; }
+        public string pdf_file { get; set; }
     }
 }

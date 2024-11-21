@@ -1,22 +1,27 @@
 ﻿@model IEnumerable<WebApp.Models.CompCard>
-@{
-    ViewBag.Title = "Index";
-}
-
-<h3>Documentation</h3>
 
 <h2>Cards</h2>
 
-<div class="card-container">
-    @foreach (var card in Model)
-    {
-        <div class="card">
-          @*  <img src="@card.ImageUrl" alt="@card.Title" />*@
-            <div class="card-content">
-                <h3>@card.title</h3>
-                <p>@card.description</p>
-                <a href="@card.pdf_file" class="btn-download" download>Download PDF</a>
+@if (Model == null || !Model.Any())
+{
+    <p>No cards available to display.</p>
+}
+else
+{
+    <div class="card-container">
+        @foreach (var card in Model)
+        {
+            <div class="card">
+                <img src="@card.img" alt="@card.title" />
+                <div class="card-content">
+                    <h3>@card.title</h3>
+                    <p>@card.description</p>
+                    @if (!string.IsNullOrEmpty(card.pdf_file))
+                    {
+                        <a href="@card.pdf_file" download class="btn-download">Download PDF</a>
+                    }
+                </div>
             </div>
-        </div>
-    }
-</div>
+        }
+    </div>
+}

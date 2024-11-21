@@ -22,7 +22,7 @@ namespace WebApp.BusinessLogic
             return USinginStatus(user);
         }
 
-        public List<CoCard> GetCoCards()
+        public List<CoCard> GetAllCards()
         {
             return GetAllCards();
         }
