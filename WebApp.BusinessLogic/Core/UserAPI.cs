@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using WebApp.BusinessLogic.DBModel;
 using WebApp.Domain.Entities.Comp;
@@ -90,9 +92,55 @@ namespace WebApp.BusinessLogic.Core
             }
            
         }
-        public List<CoCard> GetCoCards()
+        public List<CoCard> GetAllCards()
         {
-            return GetAllCards();
+            using (var dbContext = new CardContext())
+            {
+                var car =  dbContext.Card_Table.ToListAsync();
+                var card = Mapper.Map<List<CoCard>>(car);
+
+                return card;
+            }
         }
+        public ActionStatus AddManualCard()
+        {
+            try
+            {
+                // Creează manual datele pentru card
+                var newCard = new CoCardDBTable
+                {
+                    title = "Sample Card",
+                    description = "This is a manually added card.",
+                    img = System.IO.File.ReadAllBytes("C:\\Users\\danie\\andre\\WebApp\\Assets\\log-in-3.jpg"), // Înlocuiește cu calea imaginii
+                };
+
+                using (var dbContext = new CardContext())
+                {
+                    dbContext.Card_Table.Add(newCard); // Adaugă cardul în baza de date
+                    dbContext.SaveChanges(); // Salvează modificările
+                }
+
+                return new ActionStatus
+                {
+                    IsSuccess = true,
+                    StatusMessage = "Card added successfully!",
+                    SessionKey = ""
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ActionStatus
+                {
+                    IsSuccess = false,
+                    StatusMessage = $"An error occurred: {ex.Message}",
+                    SessionKey = ""
+                };
+            }
+        }
+
+
+
     }
 }
+
+

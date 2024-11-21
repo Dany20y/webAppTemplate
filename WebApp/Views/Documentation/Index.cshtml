@@ -1,21 +1,21 @@
-﻿
+﻿@model IEnumerable<WebApp.Models.CompCard>
 @{
     ViewBag.Title = "Index";
 }
 
 <h3>Documentation</h3>
 
+<h2>Cards</h2>
+
 <div class="card-container">
     @foreach (var card in Model)
     {
         <div class="card">
-            <div class="card-image">
-                <img src="@card.ImageUrl" alt="@card.Title">
-            </div>
+          @*  <img src="@card.ImageUrl" alt="@card.Title" />*@
             <div class="card-content">
-                <h3>@card.Title</h3>
-                <p>@card.Description</p>
-                <a href="@card.FileUrl" download class="btn-download">Download</a>
+                <h3>@card.title</h3>
+                <p>@card.description</p>
+                <a href="@card.pdf_file" class="btn-download" download>Download PDF</a>
             </div>
         </div>
     }
