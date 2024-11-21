@@ -198,6 +198,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CompCard.cs" />
     <Compile Include="Models\LogInUser.cs" />
     <Compile Include="Models\SingInUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

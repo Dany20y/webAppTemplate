@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using WebApp.App_Start;
+using WebApp.Domain.Entities.Comp;
 using WebApp.Domain.Entities.DatabaseTables;
 using WebApp.Domain.Entities.User;
 using WebApp.Models;
@@ -27,6 +28,8 @@ namespace WebApp
                 cfg.CreateMap<SingInUser, User_Signin_Data>();
                 cfg.CreateMap<User_Signin_Data, UserDBTable>();
                 cfg.CreateMap<UserDBTable, User_Signin_Data>();
+                cfg.CreateMap<CoCardDBTable, CoCard>();
+                cfg.CreateMap<CoCard, CompCard>();
             });
         }
     }

@@ -11,19 +11,19 @@ namespace WebApp.Domain.Entities.DatabaseTables
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int id;
+        public int id { get; set; }
 
         [Required]
         [Display(Name = "Title")]
-        public string title;
+        public string title { get; set; }
 
         [Display(Name = "Description")]
-        public string description;
+        public string description { get; set; }
 
         [Display(Name = "Image")]
-        public byte[] img;
+        public byte[] img { get; set; }
 
         [Display(Name = "Pdf File")]
-        public byte[] pdf_file;
+        public byte[] pdf_file { get; set; }
     }
 }
