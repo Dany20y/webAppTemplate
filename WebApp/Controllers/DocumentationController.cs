@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using WebApp.BusinessLogic.Core;
 using WebApp.BusinessLogic.Interfaces;
 using WebApp.Domain.Entities.Comp;
+using WebApp.Domain.Entities.DatabaseTables;
 using WebApp.Models;
 
 namespace WebApp.Controllers
@@ -18,7 +19,7 @@ namespace WebApp.Controllers
         public DocumentationController()
         {
             var bl = new BusinessLogic.BusinessLogic();
-            _session= bl.GetSession();
+            _session = bl.GetSession();
         }
 
         public ActionResult Index()
@@ -26,11 +27,12 @@ namespace WebApp.Controllers
             return View();
         }
 
+
         [HttpPost]
         public ActionResult Cards()
         {
             var userAPI = new UserAPI();
-            var cards = userAPI.GetCoCards();
+            var cards = userAPI.GetCoCards(); // Obține lista de carduri mapată la CompCard
 
             if (cards == null || !cards.Any())
             {
@@ -38,11 +40,10 @@ namespace WebApp.Controllers
                 return View(new List<CompCard>()); // Trimite un model gol dacă nu există date
             }
 
+            Console.WriteLine($"Number of cards found: {cards.Count}"); // Log pentru verificare
             return View(cards); // Transmite modelul către view
         }
 
 
-
     }
-
 }

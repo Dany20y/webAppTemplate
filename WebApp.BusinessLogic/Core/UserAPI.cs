@@ -28,15 +28,16 @@ namespace WebApp.BusinessLogic.Core
             }
             if (table.Email != null && table.Password == user.Password)
             {
-               using(var todo = new UserContext())
+                using (var todo = new UserContext())
                 {
                     table.Last_Login = DateTime.Now;
                     todo.Entry(table).State = System.Data.Entity.EntityState.Modified;
                     todo.SaveChanges();
                 };
-               return new ActionStatus { IsSuccess = true, StatusMessage = "200 OK", SessionKey = "" };
+                return new ActionStatus { IsSuccess = true, StatusMessage = "200 OK", SessionKey = "" };
             }
-            else {
+            else
+            {
                 return new ActionStatus
                 {
                     IsSuccess = false,
@@ -85,35 +86,55 @@ namespace WebApp.BusinessLogic.Core
                     db.Users_Table.Add(new_user);
                     db.SaveChanges();
                 }
-                return new ActionStatus { IsSuccess = true, StatusMessage="200 OK", SessionKey="" };
+                return new ActionStatus { IsSuccess = true, StatusMessage = "200 OK", SessionKey = "" };
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 return new ActionStatus { IsSuccess = false, StatusMessage = $"An error occurred: {ex.Message}", SessionKey = "" };
             }
-           
+
         }
+
+
         public List<CoCard> GetCoCards()
         {
-            using (var dbContext = new CardContext())
+            var dbCards = GetAllCardsFromDatabase();
+
+            // Mapează cardurile din CoCardDBTable la CompCard
+            var compCards = dbCards.Select(card => new CoCard
             {
-                // Preluăm toate cardurile din baza de date
-                var cardEntities = dbContext.Card_Table.ToList();
+                id = card.id,  // Folosește numele corect, așa cum este definit în CoCardDBTable
+                title = card.title,
+                description = card.description,
+                img = card.img,
+                pdf_file = card.pdf_file
+            }).ToList();
 
-                // Mapăm entitățile din baza de date în modelul aplicației
-                var cards = cardEntities.Select(c => new CoCard
-                {
-                    id = c.id,
-                    title = c.title,
-                    description = c.description,
-                    img = !string.IsNullOrEmpty(c.img) ? c.img : "/images/default.png", // Folosește imaginea implicită dacă img este null sau gol
-                    pdf_file = c.pdf_file // Presupunem că este un URL sau cale către fișier
-                }).ToList();
-
-                return cards;
-            }
+            return compCards;
         }
 
+
+        public List<CoCardDBTable> GetAllCardsFromDatabase()
+    {
+        using (var context = new CardContext())
+        {
+            try
+            {
+                var cards = context.Cards.ToList();
+                Console.WriteLine($"Number of cards fetched from database: {cards.Count}");
+                return cards;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching cards: {ex.Message}");
+                return new List<CoCardDBTable>();
+            }
+        }
     }
+
+
 }
+}
+
 
 

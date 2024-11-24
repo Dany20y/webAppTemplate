@@ -1,27 +1,60 @@
-﻿@model IEnumerable<WebApp.Models.CompCard>
+﻿<div class="container">
+    <!-- Card template repeated -->
+    <div class="card">
+        <img src="~/Assets/img-garage.png" alt="Image" onclick="zoomImage(this.src)">
+        <div class="download-icon" onclick="downloadPDF('~/Assets/pdf-1.pdf')">
 
-<h2>Cards</h2>
-
-@if (Model == null || !Model.Any())
-{
-    <p>No cards available to display.</p>
-}
-else
-{
-    <div class="card-container">
-        @foreach (var card in Model)
-        {
-            <div class="card">
-                <img src="@card.img" alt="@card.title" />
-                <div class="card-content">
-                    <h3>@card.title</h3>
-                    <p>@card.description</p>
-                    @if (!string.IsNullOrEmpty(card.pdf_file))
-                    {
-                        <a href="@card.pdf_file" download class="btn-download">Download PDF</a>
-                    }
-                </div>
-            </div>
-        }
+            <i class="fas fa-download"></i>
+        </div>
+        <div class="card-description">
+            Description for this image goes here.
+        </div>
     </div>
-}
+    <!-- Repeat above card template to have 6 rows of 3 cards -->
+    <!-- You would ideally have 18 of these cards for a total of 6 rows with 3 cards each -->
+    <!-- Example below shows more copies -->
+    <div class="card">
+        <img src="image2.jpg" alt="Image" onclick="zoomImage(this.src)">
+        <div class="download-icon" onclick="downloadPDF('file2.pdf')">
+            <i class="fas fa-download"></i>
+        </div>
+        <div class="card-description">
+            Description for this image goes here.
+        </div>
+    </div>
+    <div class="card">
+        <img src="image2.jpg" alt="Image" onclick="zoomImage(this.src)">
+        <div class="download-icon" onclick="downloadPDF('file2.pdf')">
+            <i class="fas fa-download"></i>
+        </div>
+        <div class="card-description">
+            Description for this image goes here.
+        </div>
+    </div>
+    <!-- Add more card divs as needed -->
+</div>
+
+<div id="zoom-overlay" onclick="closeZoom()">
+    <img src="" alt="Zoomed Image" id="zoomed-img">
+</div>
+
+<script>
+    function zoomImage(src) {
+        const overlay = document.getElementById('zoom-overlay');
+        const zoomedImg = document.getElementById('zoomed-img');
+        zoomedImg.src = src;
+        overlay.style.display = 'flex';
+    }
+
+    function closeZoom() {
+        const overlay = document.getElementById('zoom-overlay');
+        overlay.style.display = 'none';
+    }
+
+    function downloadPDF(file) {
+        const link = document.createElement('a');
+        link.href = file;
+        link.download = '';
+        link.click();
+    }
+</script>

@@ -13,6 +13,6 @@ namespace WebApp.BusinessLogic.Interfaces
     {
         ActionStatus LoginUserStatus(User_Login_Data user);
         ActionStatus SigninUserStatus(User_Signin_Data user);
-        List<CoCard> GetCoCards();
+        List<CoCard> CoCards { get; }
     };
 }

@@ -150,11 +150,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\img-garage.png" />
+    <Content Include="Assets\img-lake.PNG" />
+    <Content Include="Assets\img-surveytie.png" />
+    <Content Include="Assets\Logos\download-pdf.png" />
     <Content Include="Assets\Logos\google.png" />
     <Content Include="Assets\log-in-1.jpg" />
     <Content Include="Assets\log-in-2.jpg" />
     <Content Include="Assets\log-in-3.jpg" />
     <Content Include="Assets\log-in-4.jpg" />
+    <Content Include="Assets\Logos\transparency.png" />
     <Content Include="Assets\navbar.jpg" />
     <Content Include="Assets\Logos\B-logo.png" />
     <Content Include="Assets\pedro-raccoon.gif" />
@@ -228,6 +233,9 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Assets\pdf-1.pdf" />
+    <Content Include="Assets\pdf-2.pdf" />
+    <Content Include="Assets\pdf-3.pdf" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
