@@ -34,7 +34,12 @@ namespace WebApp
                 cfg.CreateMap<CompCard, CoCard>();
                 cfg.CreateMap<CoCardDBTable, CompCard>();
                 cfg.CreateMap<CompCard, CoCardDBTable>();
+
+                cfg.CreateMap<Announcement, CompAnnouncement>()
+       .ForMember(dest => dest.DateCreated, opt => opt.MapFrom(src => src.Date.ToString("dd.MM.yyyy")));
+                cfg.CreateMap<CompAnnouncement, Announcement>();
             });
+
         }
     }
 }

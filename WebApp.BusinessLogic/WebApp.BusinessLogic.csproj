@@ -116,6 +116,7 @@
     <Compile Include="Core\AdminAPI.cs" />
     <Compile Include="Core\UserAPI.cs" />
     <Compile Include="DBModel\CardContext.cs" />
+    <Compile Include="DBModel\AnnoucementsContext.cs" />
     <Compile Include="DBModel\UserContext.cs" />
     <Compile Include="Interfaces\IAdminSessionBl.cs" />
     <Compile Include="Interfaces\ISession.cs" />
