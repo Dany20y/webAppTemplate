@@ -13,5 +13,6 @@ namespace WebApp.BusinessLogic.Interfaces
     {
         ActionStatus RegisterNewCard(CoCard card, HttpPostedFileBase photofile, HttpPostedFileBase pdffile);
 
+      
     }
 }

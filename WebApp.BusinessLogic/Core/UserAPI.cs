@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using WebApp.BusinessLogic.DBModel;
@@ -93,24 +94,6 @@ namespace WebApp.BusinessLogic.Core
         }
 
 
-        public List<CoCard> GetCoCards()
-        {
-            var dbCards = GetAllCardsFromDatabase();
-
-            // Mapează cardurile din CoCardDBTable la CompCard
-            var compCards = dbCards.Select(card => new CoCard
-            {
-                id = card.id,  
-                title = card.title,
-                description = card.description,
-                img = card.img,
-                pdf_file = card.pdf_file,
-            }).ToList();
-
-            return compCards;
-        }
-
-
         public List<CoCard> GetAllCardsFromDatabase()
         {
             using (var context = new CardContext())
@@ -122,36 +105,15 @@ namespace WebApp.BusinessLogic.Core
             }
         }
 
-        public string GetPhotoBase64(int cardId)
+        public CoCard GetCardUsingId(int card)
         {
-            try
+            using (var context = new CardContext()) 
             {
-                byte[] PhotoBytes;
-                using (var db = new CardContext())
-                {
-                    var user = db.Cards.FirstOrDefault(u => u.id == cardId);
-                    if (user != null && user.img != null)
-                    {
-                        PhotoBytes = user.img;
-                    }
-                    else
-                    {
-                        string defaultPhotoPath = "path_to_default_photo.jpg";
-                        PhotoBytes = File.ReadAllBytes(defaultPhotoPath);
-                    }
-                }
-
-                string base64String = Convert.ToBase64String(PhotoBytes);
-
-                return base64String;
-            }
-            catch (Exception ex)
-            {
-                return null;
+                var cards = context.Cards.FirstOrDefault(c => c.id == card);
+                var CoCard = Mapper.Map<CoCard>(cards);
+                return CoCard;
             }
         }
-
-
     }
 }
 

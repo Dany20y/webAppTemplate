@@ -24,12 +24,30 @@ namespace WebApp.Controllers
             _session = bl.GetSession();
         }
 
-        [HttpPost]
-        public ActionResult Index(int id)
+       
+
+        [HttpGet]
+        public ActionResult Index()
         {
             var cards = _session.GetCards();
             var viewModelCards = Mapper.Map<List<CompCard>>(cards);
             return View(viewModelCards);
+        }
+
+        public ActionResult DownloadPDF(int id)
+        {
+         
+            var card = _session.GetCardById(id);
+
+            if (card == null || card.pdf_file == null)
+            {
+                return HttpNotFound("The requested file does not exist.");
+            }
+
+            byte[] fileBytes = card.pdf_file;
+            string fileName = $"{card.title}.pdf";
+
+            return File(fileBytes, "application/pdf", fileName);
         }
 
 

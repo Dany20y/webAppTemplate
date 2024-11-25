@@ -28,28 +28,10 @@ namespace WebApp.BusinessLogic
             return GetAllCardsFromDatabase();
         }
 
-        // Corectarea funcției GetCoCards pentru a implementa interfața ISession și pentru a mapa la CompCard
-        public List<CoCard> CoCards
+        public CoCard GetCardById(int card)
         {
-            get
-            {
-                // Obținem cardurile din baza de date
-                var dbCards = GetAllCardsFromDatabase();
-
-                // Mapăm cardurile din tipul CoCardDBTable în tipul CompCard
-                var compCards = dbCards.Select(card => new CoCard
-                {
-                    id = card.id,
-                    title = card.title,           // Maparea Name la title
-                    description = card.description,
-                    img = card.img,        // Presupunem că există o proprietate `ImagePath` în CoCardDBTable
-                    pdf_file = card.pdf_file  // Presupunem că există o proprietate `PdfFilePath` în CoCardDBTable
-                }).ToList();
-
-                return compCards;
-            }
+            return GetCardUsingId(card);
         }
-
         
     }
 }
