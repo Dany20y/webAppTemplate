@@ -13,7 +13,6 @@ namespace WebApp.BusinessLogic
     public class SessionBL : UserAPI, ISession
     {
         private readonly ApplicationDbContext _context;
-
         public SessionBL()
         {
             _context = new ApplicationDbContext();
@@ -41,7 +40,7 @@ namespace WebApp.BusinessLogic
             return GetAllCardsFromDatabase();
         }
 
-        public List<CoCard> CoCards
+        /*public List<CoCard> CoCards
         {
             get
             {
@@ -55,8 +54,8 @@ namespace WebApp.BusinessLogic
                     pdf_file = card.pdf_file
                 }).ToList();
             }
-        }
+        }*/
 
-        
+
     }
 }

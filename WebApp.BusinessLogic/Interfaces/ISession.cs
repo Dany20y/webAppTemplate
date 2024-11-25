@@ -15,10 +15,10 @@ namespace WebApp.BusinessLogic.Interfaces
         ActionStatus LoginUserStatus(User_Login_Data user);
         ActionStatus SigninUserStatus(User_Signin_Data user);
         List<CoCardDBTable> GetCards();
-        List<CoCard> CoCards { get; }
+       /* List<CoCard> CoCards { get; }*/
         ActionStatus RegisterNewCard(CoCard card);
         List<Announcement> GetAnnouncements(); // Preluarea anunțurilor pentru utilizatorii obișnuiți
-        List<CoCard> GetCards();
+        /*List<CoCard> GetCards();*/
      /*   List<CoCard> CoCards { get; }*/
     };
 }
