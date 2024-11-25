@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Drawing;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
 using WebApp.BusinessLogic.DBModel;
 using WebApp.Domain.Entities.Comp;
 using WebApp.Domain.Entities.DatabaseTables;
@@ -115,26 +111,57 @@ namespace WebApp.BusinessLogic.Core
 
 
         public List<CoCardDBTable> GetAllCardsFromDatabase()
-    {
-        using (var context = new CardContext())
+        {
+            using (var context = new CardContext())
+            {
+                try
+                {
+                    var cards = context.Cards.ToList();
+                    Console.WriteLine($"Number of cards fetched from database: {cards.Count}");
+                    return cards;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error fetching cards: {ex.Message}");
+                    return new List<CoCardDBTable>();
+                }
+            }
+        }
+
+        public ActionStatus CreateCard(CoCard card)
         {
             try
             {
-                var cards = context.Cards.ToList();
-                Console.WriteLine($"Number of cards fetched from database: {cards.Count}");
-                return cards;
+                using (var db = new CardContext())
+                {
+                    bool cardExists = db.Cards.Any(e => e.title == card.title);
+                    if (cardExists)
+                    {
+                        return new ActionStatus
+                        {
+                            IsSuccess = false,
+                            StatusMessage = "There is already a card with this title",
+                            SessionKey = "",
+                        };
+                    };
+                }
+
+                var new_card = Mapper.Map<CoCardDBTable>(card);
+                using (var db = new CardContext())
+                {
+                    db.Cards.Add(new_card);
+                    db.SaveChanges();
+                }
+                return new ActionStatus { IsSuccess = true, StatusMessage = "200 OK", SessionKey = "" };
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error fetching cards: {ex.Message}");
-                return new List<CoCardDBTable>();
+                return new ActionStatus { IsSuccess = false, StatusMessage = $"An error occurred: {ex.Message}", SessionKey = "" };
             }
         }
     }
-
-
 }
-}
+
 
 
 

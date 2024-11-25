@@ -7,7 +7,6 @@ namespace WebApp.Models
 {
     public class CompCard
     {
-        public int id { get; set; }
         public string title { get; set; }
         public string description { get; set; }
         public string img { get; set; }

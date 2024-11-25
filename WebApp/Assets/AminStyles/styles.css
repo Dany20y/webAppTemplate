@@ -1,0 +1,39 @@
+﻿/* Ensure the body and container take up the full height of the viewport */
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* Sidebar styling */
+#sidebar {
+    width: 250px;
+    height: 100vh; /* Full height */
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #343a40;
+}
+
+/* Main content styling */
+#main-content {
+    margin-left: 250px; /* Same as sidebar width */
+    height: 100vh; /* Full height */
+    overflow-y: auto; /* Scroll if content overflows */
+    background-color: #f8f9fa; /* Light background for content */
+    padding: 20px;
+}
+
+/* Sidebar link styling */
+.nav-link {
+    display: block;
+    padding: 10px;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+    .nav-link:hover,
+    .nav-link.active {
+        background-color: #495057;
+    }

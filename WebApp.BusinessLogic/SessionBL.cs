@@ -5,6 +5,7 @@ using System.Web;
 using WebApp.BusinessLogic.Core;
 using WebApp.BusinessLogic.Interfaces;
 using WebApp.Domain.Entities.Comp;
+using WebApp.Domain.Entities.DatabaseTables;
 using WebApp.Domain.Entities.Response;
 using WebApp.Domain.Entities.User;
 
@@ -20,6 +21,11 @@ namespace WebApp.BusinessLogic
         public ActionStatus SigninUserStatus(User_Signin_Data user)
         {
             return USinginStatus(user);
+        }
+
+        public List<CoCardDBTable> GetCards() 
+        {
+            return GetAllCardsFromDatabase();
         }
 
         // Corectarea funcției GetCoCards pentru a implementa interfața ISession și pentru a mapa la CompCard
@@ -42,6 +48,12 @@ namespace WebApp.BusinessLogic
 
                 return compCards;
             }
+        }
+
+        public ActionStatus RegisterNewCard(CoCard card)
+        {
+            return CreateCard(card);
+
         }
     }
 }

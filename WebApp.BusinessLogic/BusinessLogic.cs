@@ -14,5 +14,9 @@ namespace WebApp.BusinessLogic
         {
             return new SessionBL();
         }
+        public IAdminSessionBl GetAdminSession()
+        {
+            return new AdminSessionBL();
+        }
     }
 }

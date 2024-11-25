@@ -150,6 +150,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\AminStyles\styles.css" />
     <Content Include="Assets\img-garage.png" />
     <Content Include="Assets\img-lake.PNG" />
     <Content Include="Assets\img-surveytie.png" />
@@ -194,6 +195,7 @@
     <Compile Include="App_Start\BundlesConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AbbreviationController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\DocumentationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
@@ -245,6 +247,11 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Views\Abbreviation\Index.cshtml" />
     <Content Include="Views\Documentation\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Shared\AdminLayout.cshtml" />
+    <Content Include="Views\Admin\Users.cshtml" />
+    <Content Include="Views\Admin\AddDocumentation.cshtml" />
+    <Content Include="Views\Shared\_AdminSidebar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

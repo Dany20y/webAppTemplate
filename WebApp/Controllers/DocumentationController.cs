@@ -1,5 +1,7 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -24,11 +26,14 @@ namespace WebApp.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var cards = _session.GetCards();
+            var viewModelCards = Mapper.Map<List<CompCard>>(cards);
+            return View(viewModelCards);
         }
 
 
-        [HttpPost]
+
+       /* [HttpPost]
         public ActionResult Cards()
         {
             var userAPI = new UserAPI();
@@ -42,7 +47,7 @@ namespace WebApp.Controllers
 
             Console.WriteLine($"Number of cards found: {cards.Count}"); // Log pentru verificare
             return View(cards); // Transmite modelul către view
-        }
+        }*/
 
 
     }

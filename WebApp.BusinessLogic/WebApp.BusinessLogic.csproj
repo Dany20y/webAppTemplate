@@ -111,10 +111,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminSessionBL.cs" />
     <Compile Include="BusinessLogic.cs" />
+    <Compile Include="Core\AdminAPI.cs" />
     <Compile Include="Core\UserAPI.cs" />
     <Compile Include="DBModel\CardContext.cs" />
     <Compile Include="DBModel\UserContext.cs" />
+    <Compile Include="Interfaces\IAdminSessionBl.cs" />
     <Compile Include="Interfaces\ISession.cs" />
     <Compile Include="Migrations\202411210048098_InitialCreate.cs" />
     <Compile Include="Migrations\202411210048098_InitialCreate.Designer.cs">

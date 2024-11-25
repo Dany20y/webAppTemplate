@@ -30,6 +30,8 @@ namespace WebApp
                 cfg.CreateMap<UserDBTable, User_Signin_Data>();
                 cfg.CreateMap<CoCardDBTable, CoCard>();
                 cfg.CreateMap<CoCard, CompCard>();
+                cfg.CreateMap<CoCardDBTable, CompCard>();
+                cfg.CreateMap<CompCard, CoCardDBTable>();
             });
         }
     }
