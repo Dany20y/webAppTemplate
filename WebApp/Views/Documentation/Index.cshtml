@@ -3,11 +3,18 @@
 <div class="container">
     @foreach (var card in Model)
     {
-        <div class="card" id="card-">
-            <img src="@Convert.ToBase64String(card.img)" alt="@card.title" onclick="zoomImage('@Convert.ToBase64String(card.img)')">
-            <div class="download-icon" onclick="downloadPDF('@Convert.ToBase64String(card.pdf_file)')">
+        <div class="card" id="card-@card.Id">
+            <!-- Image Rendering -->
+            <img src="data:image/png;base64,@(Convert.ToBase64String(card.img))"
+                 alt="@card.title"
+                 onclick="zoomImage('data:image/png;base64,@(Convert.ToBase64String(card.img))')" />
+
+            <!-- Download Icon -->
+            <div class="download-icon" onclick="downloadPDF('@Url.Action("DownloadPDF", "Admin", new { id = card.title })')">
                 <i class="fas fa-download"></i>
             </div>
+
+            <!-- Card Description -->
             <div class="card-description">
                 @card.description
             </div>
@@ -35,11 +42,10 @@
     function downloadPDF(file) {
         const link = document.createElement('a');
         link.href = file;
-        link.download = '';
+        link.download = 'download.pdf';
         link.click();
     }
 </script>
-
 
 
 

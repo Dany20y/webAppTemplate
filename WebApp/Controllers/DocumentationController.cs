@@ -24,30 +24,13 @@ namespace WebApp.Controllers
             _session = bl.GetSession();
         }
 
-        public ActionResult Index()
+        [HttpPost]
+        public ActionResult Index(int id)
         {
             var cards = _session.GetCards();
             var viewModelCards = Mapper.Map<List<CompCard>>(cards);
             return View(viewModelCards);
         }
-
-
-
-       /* [HttpPost]
-        public ActionResult Cards()
-        {
-            var userAPI = new UserAPI();
-            var cards = userAPI.GetCoCards(); // Obține lista de carduri mapată la CompCard
-
-            if (cards == null || !cards.Any())
-            {
-                ViewBag.Message = "No cards available to display.";
-                return View(new List<CompCard>()); // Trimite un model gol dacă nu există date
-            }
-
-            Console.WriteLine($"Number of cards found: {cards.Count}"); // Log pentru verificare
-            return View(cards); // Transmite modelul către view
-        }*/
 
 
     }
