@@ -324,3 +324,121 @@ form {
         max-width: 90%;
         max-height: 90%;
     }
+
+/* --- HOME --- */
+    main {
+  padding: 2rem;
+}
+
+.search-section {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.search-section input {
+  padding: 0.5rem;
+  width: 60%;
+  margin-right: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-section button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-section button:hover {
+  background-color: #0056b3;
+}
+
+.updates {
+  margin-bottom: 2rem;
+}
+
+.updates h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.updates ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.updates li {
+  background-color: #f1f1f1;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.cta-section {
+  text-align: center;
+}
+
+.cta-section button {
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #28a745;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cta-section button:hover {
+  background-color: #218838;
+}
+
+
+.updates {
+    margin-top: 20px;
+}
+
+    .updates h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .updates ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .updates li {
+        background-color: #f8f8f8;
+        padding: 10px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+    }
+
+form {
+    margin-top: 20px;
+}
+
+    form div {
+        margin-bottom: 10px;
+    }
+
+textarea {
+    width: 100%;
+    font-size: 16px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+    button:hover {
+        background-color: #0056b3;
+    }

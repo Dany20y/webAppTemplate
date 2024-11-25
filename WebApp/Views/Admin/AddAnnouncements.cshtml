@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "Add Announcements";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>Add Announcements</h2>
+
+@model IEnumerable<WebApp.Models.CompAnnouncement>
+
+@{
+    ViewBag.Title = "Administrare Anunțuri";
+}
+
+<h2>Administrare Anunțuri</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<!-- Formular pentru adăugare anunț -->
+<form method="post" action="/Home/AddAnnouncement">
+    <div>
+        <label for="Title">Titlu:</label>
+        <input type="text" id="Title" name="Title" required />
+    </div>
+    <div>
+        <label for="Description">Descriere:</label>
+        <textarea id="Description" name="Description" required></textarea>
+    </div>
+    <button type="submit">Adaugă Anunț</button>
+</form>
+
+<hr />
+
+<!-- Listă cu anunțurile existente -->
+<h3>Anunțuri existente:</h3>
+<ul>
+    @foreach (var announcement in Model)
+    {
+        <li>
+            <strong>@announcement.DateCreated:</strong> @announcement.Title - @announcement.Description
+            <form method="post" action="/Home/DeleteAnnouncement" style="display:inline;">
+                <input type="hidden" name="id" value="@announcement.Id" />
+                <button type="submit" onclick="return confirm('Sigur doriți să ștergeți acest anunț?');">Șterge</button>
+            </form>
+        </li>
+    }
+</ul>

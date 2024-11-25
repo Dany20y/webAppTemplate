@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using WebApp.BusinessLogic;
 using WebApp.BusinessLogic.Interfaces;
 using WebApp.Domain.Entities.Comp;
 using WebApp.Domain.Entities.Response;
 using WebApp.Models;
+using WebApp.Domain;
+using System.Web;
 
 namespace WebApp.Controllers
 {
@@ -23,12 +23,47 @@ namespace WebApp.Controllers
         }
 
         // GET: Admin
+        private ApplicationDbContext _context = new ApplicationDbContext();
+
         public ActionResult Index()
+        {
+            var announcements = _context.Announcements.OrderByDescending(a => a.Date).ToList();
+            return View(announcements);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteAnnouncement(int id)
+        {
+            var announcement = _context.Announcements.SingleOrDefault(a => a.Id == id);
+            if (announcement != null)
+            {
+                _context.Announcements.Remove(announcement);
+                _context.SaveChanges();
+                TempData["Success"] = "Anunț șters cu succes!";
+            }
+            else
+            {
+                TempData["Error"] = "Anunțul nu a fost găsit!";
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult AddAbbreviation()
         {
             return View();
         }
 
         public ActionResult AddDocumentation()
+        {
+            return View();
+        }
+        public ActionResult AddTemplate()
+        {
+            return View();
+        }
+
+        public ActionResult AddUpdates()
         {
             return View();
         }

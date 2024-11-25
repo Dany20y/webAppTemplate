@@ -98,7 +98,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Comp\CoAnnoucements.cs" />
     <Compile Include="Entities\Comp\CoCard.cs" />
+    <Compile Include="Entities\DatabaseTables\CoAnnouncementsDBTable.cs" />
     <Compile Include="Entities\DatabaseTables\CoCardDBTable.cs" />
     <Compile Include="Entities\DatabaseTables\SessionDBTable.cs" />
     <Compile Include="Entities\DatabaseTables\UserDBTable.cs" />

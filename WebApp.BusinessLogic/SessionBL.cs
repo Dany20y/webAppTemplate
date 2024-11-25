@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using WebApp.BusinessLogic.Core;
 using WebApp.BusinessLogic.Interfaces;
+using WebApp.Domain;
 using WebApp.Domain.Entities.Comp;
 using WebApp.Domain.Entities.DatabaseTables;
 using WebApp.Domain.Entities.Response;
@@ -13,6 +12,19 @@ namespace WebApp.BusinessLogic
 {
     public class SessionBL : UserAPI, ISession
     {
+        private readonly ApplicationDbContext _context;
+        public SessionBL()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        // Implementarea metodei GetAnnouncements din ISession
+        public List<Announcement> GetAnnouncements()
+        {
+            return _context.Announcements.OrderByDescending(a => a.Date).ToList();
+        }
+
+        // Alte metode deja implementate
         public ActionStatus LoginUserStatus(User_Login_Data user)
         {
             return ULoginStatus(user);

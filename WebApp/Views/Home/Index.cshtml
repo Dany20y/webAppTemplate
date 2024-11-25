@@ -1,5 +1,11 @@
-﻿@{
-    ViewBag.Title = "Student Help";
-}
+﻿@model IEnumerable<WebApp.Models.CompAnnouncement>
 
-<h2>Student Help, BITCH!</h2>
+<section class="updates">
+    <h2>Anunțuri Recente:</h2>
+    <ul>
+        @foreach (var announcement in Model)
+        {
+            <li>[@announcement.DateCreated] @announcement.Title - @announcement.Description</li>
+        }
+    </ul>
+</section>
