@@ -119,13 +119,9 @@
     <Compile Include="DBModel\UserContext.cs" />
     <Compile Include="Interfaces\IAdminSessionBl.cs" />
     <Compile Include="Interfaces\ISession.cs" />
-    <Compile Include="Migrations\202411210048098_InitialCreate.cs" />
-    <Compile Include="Migrations\202411210048098_InitialCreate.Designer.cs">
-      <DependentUpon>202411210048098_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202411211156392_InitialCreate1.cs" />
-    <Compile Include="Migrations\202411211156392_InitialCreate1.Designer.cs">
-      <DependentUpon>202411211156392_InitialCreate1.cs</DependentUpon>
+    <Compile Include="Migrations\202411250232368_UpdateCoCardFields.cs" />
+    <Compile Include="Migrations\202411250232368_UpdateCoCardFields.Designer.cs">
+      <DependentUpon>202411250232368_UpdateCoCardFields.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -147,11 +143,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202411210048098_InitialCreate.resx">
-      <DependentUpon>202411210048098_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202411211156392_InitialCreate1.resx">
-      <DependentUpon>202411211156392_InitialCreate1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202411250232368_UpdateCoCardFields.resx">
+      <DependentUpon>202411250232368_UpdateCoCardFields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

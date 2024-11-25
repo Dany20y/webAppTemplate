@@ -1,35 +1,92 @@
-﻿@{
-    ViewBag.Title = "Add Documentation";
-    Layout = "~/Views/Shared/AdminLayout.cshtml"; 
+﻿@model WebApp.Models.CompCard
+
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    ViewBag.Title = "Add Card";
 }
 
-<h2>Add Documentation</h2>
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="card mt-5">
+            <div class="card-header">
+                <h3 class="mb-0">Add Card</h3>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("AddDocumentation", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", id = "addCardForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <!-- Title Field -->
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.title, "Title")
+                        @Html.TextBoxFor(model => model.title, new { @class = "form-control", placeholder = "Enter the title" })
+                        @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
+                    </div>
 
-<form action="/Admin/SaveDocumentation" method="post" enctype="multipart/form-data">
-    <!-- Title Field -->
-    <div class="form-group">
-        <label for="title">Title</label>
-        <input type="text" class="form-control" id="title" name="title" placeholder="Enter the title" required />
+                    <!-- Description Field -->
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.description, "Description")
+                        @Html.TextAreaFor(model => model.description, new { @class = "form-control", rows = 4, placeholder = "Enter the description" })
+                        @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                    </div>
+
+                    <!-- Image Upload -->
+                    <div class="form-group">
+                        @Html.Label("Image Upload")
+                        <input type="file" class="form-control" id="img" name="photofile" accept="image/*" />
+                    </div>
+
+                    <!-- PDF File Upload -->
+                    <div class="form-group">
+                        @Html.Label("PDF File Upload")
+                        <input type="file" class="form-control" id="pdf_file" name="pdffile" accept="application/pdf" />
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-dark rounded-pill">Save Card</button>
+                }
+            </div>
+        </div>
     </div>
+</div>
 
-    <!-- Description Field -->
-    <div class="form-group">
-        <label for="description">Description</label>
-        <textarea class="form-control" id="description" name="description" rows="4" placeholder="Enter a description" required></textarea>
+<div id="notification" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+        <div class="toast-body">
+            @ViewBag.Message
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
+</div>
 
-    <!-- Image Upload -->
-    <div class="form-group">
-        <label for="img">Image</label>
-        <input type="file" class="form-control" id="img" name="img" accept="image/*" />
-    </div>
+<script>
+    $(document).ready(function () {
+        $("#addCardForm").submit(function (event) {
+            event.preventDefault();
 
-    <!-- PDF File Upload -->
-    <div class="form-group">
-        <label for="pdf_file">PDF File</label>
-        <input type="file" class="form-control" id="pdf_file" name="pdf_file" accept="application/pdf" />
-    </div>
+            $.ajax({
+                url: "@Url.Action("AddDocumentation", "Admin")",
+                type: "POST",
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    // Display notification
+                    $(".toast").toast({ delay: 3000 }).toast('show');
 
-    <!-- Submit Button -->
-    <button type="submit" class="btn btn-dark rounded-pill">Save Documentation</button>
-</form>
+                    // Clear input fields
+                    $("#title").val("");
+                    $("#description").val("");
+                    // Clear file inputs
+                    $("#img").val("");
+                    $("#pdf_file").val("");
+                },
+                error: function (xhr, status, error) {
+                    // Handle error
+                    console.error(xhr.responseText);
+                    $("#notification .toast-body").text("An error occurred: " + xhr.responseText);
+                    $(".toast").toast({ delay: 3000 }).toast('show');
+                }
+            });
+        });
+    });
+</script>

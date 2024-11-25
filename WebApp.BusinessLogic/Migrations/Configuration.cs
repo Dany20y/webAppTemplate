@@ -9,8 +9,7 @@
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
-            ContextKey = "WebApp.BusinessLogic.DBModel.CardContext";
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(WebApp.BusinessLogic.DBModel.CardContext context)

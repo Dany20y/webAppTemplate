@@ -23,7 +23,7 @@ namespace WebApp.BusinessLogic
             return USinginStatus(user);
         }
 
-        public List<CoCardDBTable> GetCards() 
+        public List<CoCard> GetCards() 
         {
             return GetAllCardsFromDatabase();
         }
@@ -50,10 +50,6 @@ namespace WebApp.BusinessLogic
             }
         }
 
-        public ActionStatus RegisterNewCard(CoCard card)
-        {
-            return CreateCard(card);
-
-        }
+        
     }
 }

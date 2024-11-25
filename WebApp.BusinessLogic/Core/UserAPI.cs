@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using WebApp.BusinessLogic.DBModel;
 using WebApp.Domain.Entities.Comp;
@@ -99,66 +100,58 @@ namespace WebApp.BusinessLogic.Core
             // Mapează cardurile din CoCardDBTable la CompCard
             var compCards = dbCards.Select(card => new CoCard
             {
-                id = card.id,  // Folosește numele corect, așa cum este definit în CoCardDBTable
+                id = card.id,  
                 title = card.title,
                 description = card.description,
                 img = card.img,
-                pdf_file = card.pdf_file
+                pdf_file = card.pdf_file,
             }).ToList();
 
             return compCards;
         }
 
 
-        public List<CoCardDBTable> GetAllCardsFromDatabase()
+        public List<CoCard> GetAllCardsFromDatabase()
         {
             using (var context = new CardContext())
             {
-                try
-                {
+               
                     var cards = context.Cards.ToList();
-                    Console.WriteLine($"Number of cards fetched from database: {cards.Count}");
-                    return cards;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error fetching cards: {ex.Message}");
-                    return new List<CoCardDBTable>();
-                }
+                    var CoCards = Mapper.Map<List<CoCard>>(cards);
+                    return CoCards;
             }
         }
 
-        public ActionStatus CreateCard(CoCard card)
+        public string GetPhotoBase64(int cardId)
         {
             try
             {
+                byte[] PhotoBytes;
                 using (var db = new CardContext())
                 {
-                    bool cardExists = db.Cards.Any(e => e.title == card.title);
-                    if (cardExists)
+                    var user = db.Cards.FirstOrDefault(u => u.id == cardId);
+                    if (user != null && user.img != null)
                     {
-                        return new ActionStatus
-                        {
-                            IsSuccess = false,
-                            StatusMessage = "There is already a card with this title",
-                            SessionKey = "",
-                        };
-                    };
+                        PhotoBytes = user.img;
+                    }
+                    else
+                    {
+                        string defaultPhotoPath = "path_to_default_photo.jpg";
+                        PhotoBytes = File.ReadAllBytes(defaultPhotoPath);
+                    }
                 }
 
-                var new_card = Mapper.Map<CoCardDBTable>(card);
-                using (var db = new CardContext())
-                {
-                    db.Cards.Add(new_card);
-                    db.SaveChanges();
-                }
-                return new ActionStatus { IsSuccess = true, StatusMessage = "200 OK", SessionKey = "" };
+                string base64String = Convert.ToBase64String(PhotoBytes);
+
+                return base64String;
             }
             catch (Exception ex)
             {
-                return new ActionStatus { IsSuccess = false, StatusMessage = $"An error occurred: {ex.Message}", SessionKey = "" };
+                return null;
             }
         }
+
+
     }
 }
 

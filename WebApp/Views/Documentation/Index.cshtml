@@ -3,9 +3,9 @@
 <div class="container">
     @foreach (var card in Model)
     {
-        <div class="card">
-            <img src="@Url.Content(card.img)" alt="@card.title" onclick="zoomImage('@Url.Content(card.img)')">
-            <div class="download-icon" onclick="downloadPDF('@Url.Content(card.pdf_file)')">
+        <div class="card" id="card-">
+            <img src="@Convert.ToBase64String(card.img)" alt="@card.title" onclick="zoomImage('@Convert.ToBase64String(card.img)')">
+            <div class="download-icon" onclick="downloadPDF('@Convert.ToBase64String(card.pdf_file)')">
                 <i class="fas fa-download"></i>
             </div>
             <div class="card-description">

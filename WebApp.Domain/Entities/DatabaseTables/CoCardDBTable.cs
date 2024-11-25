@@ -20,9 +20,9 @@ namespace WebApp.Domain.Entities.DatabaseTables
         public string description { get; set; }
 
         [Display(Name = "Image")]
-        public string img { get; set; }
+        public byte[] img { get; set; }
 
         [Display(Name = "Pdf File")]
-        public string pdf_file { get; set; }
+        public byte[] pdf_file { get; set; }
     }
 }

@@ -10,11 +10,5 @@ namespace WebApp.BusinessLogic.DBModel
         }
 
         public DbSet<CoCardDBTable> Cards { get; set; }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<CoCardDBTable>().ToTable("CoCardDBTables"); // Maparea corectă a tabelului
-            base.OnModelCreating(modelBuilder);
-        }
     }
 }
