@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
+using System.Web;
 using WebApp.BusinessLogic.DBModel;
 using WebApp.Domain.Entities.Comp;
 using WebApp.Domain.Entities.DatabaseTables;
@@ -16,33 +19,68 @@ namespace WebApp.BusinessLogic.Core
     {
         public ActionStatus ULoginStatus(User_Login_Data user)
         {
-            //TO DO: add the log in method, documetn yourself on the
-            //google api and twiter api to make the autheification
-            UserDBTable table;
-            using (var db = new UserContext())
+            try
             {
-                table = db.Users_Table.FirstOrDefault(u => u.Email == user.Email);
-            }
-            if (table.Email != null && table.Password == user.Password)
-            {
-                using (var todo = new UserContext())
+                UserDBTable userRecord;
+
+                // Verify user existence
+                using (var db = new UserContext())
                 {
-                    table.Last_Login = DateTime.Now;
-                    todo.Entry(table).State = System.Data.Entity.EntityState.Modified;
-                    todo.SaveChanges();
+                    userRecord = db.Users_Table.FirstOrDefault(u => u.Email == user.Email && u.Password == user.Password);
+
+                    if (userRecord == null)
+                    {
+                        return new ActionStatus
+                        {
+                            IsSuccess = false,
+                            StatusMessage = "Invalid email or password.",
+                            SessionKey = ""
+                        };
+                    }
+                }
+
+                // Check if the user is an admin (or any other role you need to check)
+                bool isAdmin = userRecord.Level == LevelAccess.ADMIN; // Replace LevelAccess.ADMIN with your actual enum value or role check
+
+                // Update last login timestamp
+                using (var db = new UserContext())
+                {
+                    userRecord.Last_Login = DateTime.Now;
+                    db.Entry(userRecord).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                }
+
+                // Create a session for the user
+                string sessionKey = CreateSession(userRecord.UserId);
+
+                // Return successful response with session key and user role
+                return new ActionStatus
+                {
+                    IsSuccess = true,
+                    StatusMessage = "Login successful.",
+                    SessionKey = sessionKey,
+                    IsAdmin = isAdmin,
                 };
-                return new ActionStatus { IsSuccess = true, StatusMessage = "200 OK", SessionKey = "" };
             }
-            else
+            catch (Exception ex)
             {
+                // Log exception (you can use a logger here)
                 return new ActionStatus
                 {
                     IsSuccess = false,
-                    StatusMessage = "No users found with this email!",
-                    SessionKey = "",
+                    StatusMessage = $"An error occurred during login: {ex.Message}",
+                    SessionKey = ""
                 };
             }
         }
+
+        private bool VerifyPassword(string enteredPassword, string storedPasswordHash)
+        {
+            // Use a proper hashing and verification method (e.g., BCrypt, PBKDF2)
+            // Here we are using a placeholder comparison for simplicity
+            return enteredPassword == storedPasswordHash;
+        }
+
 
         public ActionStatus USinginStatus(User_Signin_Data user)
         {
@@ -122,34 +160,37 @@ namespace WebApp.BusinessLogic.Core
             }
         }
 
-        public string GetPhotoBase64(int cardId)
+        internal string CreateSession(int userId)
         {
             try
             {
-                byte[] PhotoBytes;
-                using (var db = new CardContext())
+                using (var db = new UserContext())
                 {
-                    var user = db.Cards.FirstOrDefault(u => u.id == cardId);
-                    if (user != null && user.img != null)
+                    // Create a new session
+                    var newSession = new SessionDBTable
                     {
-                        PhotoBytes = user.img;
-                    }
-                    else
-                    {
-                        string defaultPhotoPath = "path_to_default_photo.jpg";
-                        PhotoBytes = File.ReadAllBytes(defaultPhotoPath);
-                    }
+                        UserId = userId,
+                        Cookie_Name = Guid.NewGuid().ToString(),
+                        Cookie_Expiration = DateTime.Now.AddDays(1), // Cookie expires in 1 day
+                        Cookie_SecurePolicy = true,
+                        Cookie_HttpOnly = true,
+                        Cookie_IsEssential = false,
+                        Cookie_Path = "/",
+                        Cookie_Domain = "yourdomain.com"
+                    };
+
+                    db.Session_Table.Add(newSession);
+                    db.SaveChanges();
+
+                    return newSession.Cookie_Name;
                 }
-
-                string base64String = Convert.ToBase64String(PhotoBytes);
-
-                return base64String;
             }
             catch (Exception ex)
             {
-                return null;
+                throw new Exception("Failed to create session", ex);
             }
         }
+
 
 
     }

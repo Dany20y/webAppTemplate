@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Web;
 using System.Web.Mvc;
@@ -19,6 +20,7 @@ namespace WebApp
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundlesConfig.RegisterBundles(BundleTable.Bundles);
+            
 
             Mapper.Initialize(cfg =>
             {
@@ -34,6 +36,12 @@ namespace WebApp
                 cfg.CreateMap<CompCard, CoCard>();
                 cfg.CreateMap<CoCardDBTable, CompCard>();
                 cfg.CreateMap<CompCard, CoCardDBTable>();
+                cfg.CreateMap<Session, SessionDBTable>();
+                cfg.CreateMap<SessionDBTable, Session>();
+                cfg.CreateMap<UpdateCard, UpdateCardDBTable>();
+                cfg.CreateMap<UpdateCardDBTable, UpdateCard>();
+                cfg.CreateMap<UpdateCard, UpdateCardM>();
+                cfg.CreateMap<UpdateCardM, UpdateCard>();
             });
         }
     }

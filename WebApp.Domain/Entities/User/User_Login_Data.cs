@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebApp.Domain.Entities.Enums;
 
 namespace WebApp.Domain.Entities.User
 {
@@ -9,5 +10,6 @@ namespace WebApp.Domain.Entities.User
     {
         public string Email { get; set; }
         public string Password { get; set; }
+        public LevelAccess Level { get; set; }
     }
 }

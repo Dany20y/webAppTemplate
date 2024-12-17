@@ -14,7 +14,11 @@ namespace WebApp.BusinessLogic
         public ActionStatus RegisterNewCard(CoCard card, HttpPostedFileBase photofile, HttpPostedFileBase pdffile)
         {
             return CreateCard(card, photofile, pdffile);
+        }
 
+        public ActionStatus CreateNewUpdate(UpdateCard updateCard)
+        {
+            return CreateUpdateCard (updateCard);
         }
     }
 }

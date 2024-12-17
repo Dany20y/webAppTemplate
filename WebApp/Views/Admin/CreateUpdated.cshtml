@@ -1,55 +1,44 @@
-﻿@model WebApp.Models.CompCard
+﻿@model WebApp.Models.UpdateCardM
 
 @{
     Layout = "~/Views/Shared/AdminLayout.cshtml";
-    ViewBag.Title = "Add Card";
+    ViewBag.Title = "Update Card";
 }
 
 <div class="row">
     <div class="col-lg-8 mx-auto">
         <div class="card mt-5">
             <div class="card-header">
-                <h3 class="mb-0">Add Card</h3>
+                <h3 class="mb-0">Update Card</h3>
             </div>
             <div class="card-body">
-                @using (Html.BeginForm("AddDocumentation", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", id = "addCardForm" }))
+                @using (Html.BeginForm("CreateUpdated", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", id = "updateCardForm" }))
                 {
                     @Html.AntiForgeryToken()
 
                     <!-- Title Field -->
                     <div class="form-group">
-                        @Html.LabelFor(model => model.title, "Title")
-                        @Html.TextBoxFor(model => model.title, new { @class = "form-control", placeholder = "Enter the title" })
-                        @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
+                        @Html.LabelFor(model => model.Title, "Title")
+                        @Html.TextBoxFor(model => model.Title, new { @class = "form-control", placeholder = "Enter the title" })
+                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                     </div>
 
                     <!-- Description Field -->
                     <div class="form-group">
-                        @Html.LabelFor(model => model.description, "Description")
-                        @Html.TextAreaFor(model => model.description, new { @class = "form-control", rows = 4, placeholder = "Enter the description" })
-                        @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
-                    </div>
-
-                    <!-- Image Upload -->
-                    <div class="form-group">
-                        @Html.Label("Image Upload")
-                        <input type="file" class="form-control" id="img" name="photofile" accept="image/*" />
-                    </div>
-
-                    <!-- PDF File Upload -->
-                    <div class="form-group">
-                        @Html.Label("PDF File Upload")
-                        <input type="file" class="form-control" id="pdf_file" name="pdffile" accept="application/pdf" />
+                        @Html.LabelFor(model => model.Description, "Description")
+                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = 4, placeholder = "Enter the description" })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                     </div>
 
                     <!-- Submit Button -->
-                    <button type="submit" class="btn btn-dark rounded-pill">Save Card</button>
+                    <button type="submit" class="btn btn-dark rounded-pill">Update Card</button>
                 }
             </div>
         </div>
     </div>
 </div>
 
+<!-- Notification Toast -->
 <div id="notification" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="d-flex">
         <div class="toast-body">
@@ -67,14 +56,14 @@
         }
 
         // Handle form submission via AJAX
-        $("#addCardForm").submit(function (event) {
+        $("#updateCardForm").submit(function (event) {
             event.preventDefault(); // Prevent default form submission
 
-            // Create a FormData object to handle file upload
+            // Create a FormData object to handle form submission
             var formData = new FormData(this);
 
             $.ajax({
-                url: "@Url.Action("AddDocumentation", "Admin")",
+                url: "@Url.Action("CreateUpdated", "Admin")",
                 type: "POST",
                 data: formData,
                 processData: false,
@@ -83,12 +72,15 @@
                     // Display notification
                     $(".toast").toast({ delay: 3000 }).toast('show');
 
-                    // Clear input fields
-                    $("#title").val("");
-                    $("#description").val("");
-                    // Clear file inputs
-                    $("#img").val("");
-                    $("#pdf_file").val("");
+                    // Optionally clear the form or handle response
+                    if (response.success) {
+                        $("#title").val(response.title);  // Update title field if needed
+                        $("#description").val(response.description);  // Update description field if needed
+                    } else {
+                        // Display failure message in notification
+                        $("#notification .toast-body").text(response.message);
+                        $(".toast").toast({ delay: 3000 }).toast('show');
+                    }
                 },
                 error: function (xhr, status, error) {
                     // Handle error

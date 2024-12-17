@@ -1,15 +1,17 @@
 ﻿<div class="bg-dark text-white p-3 h-100" id="sidebar">
-    <h2 class="text-center">Mate</h2>
+    @Html.ActionLink("cioto-mate", "Index", "Home", null, new { @class = "nav-link" })
     <ul class="nav flex-column">
         <li class="nav-item">
             <a class="nav-link text-white" href="/Admin/Index">Dashboard</a>
         </li>
         <li class="nav-item">
-          @*  <a class="nav-link text-white" href="/Admin/AddDocumentation">Add Documentation</a>*@
+            @*  <a class="nav-link text-white" href="/Admin/AddDocumentation">Add Documentation</a>*@
             @Html.ActionLink("Add Documentation", "AddDocumentation", "Admin", null, new { @class = "nav-link" })
         </li>
         <li class="nav-item">
             <a class="nav-link text-white" href="/Admin/Orders">Orders</a>
+            @Html.ActionLink("Add Updates", "CreateUpdated", "Admin", null, new { @class = "nav-link" })
+
         </li>
         <li class="nav-item">
             <a class="nav-link text-white" href="/Admin/Inventory">Inventory</a>

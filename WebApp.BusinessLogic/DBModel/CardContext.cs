@@ -10,5 +10,6 @@ namespace WebApp.BusinessLogic.DBModel
         }
 
         public DbSet<CoCardDBTable> Cards { get; set; }
+        public DbSet<UpdateCardDBTable> Updates { get; set; }
     }
 }

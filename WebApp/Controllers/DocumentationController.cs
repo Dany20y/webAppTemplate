@@ -9,10 +9,12 @@ using WebApp.BusinessLogic.Core;
 using WebApp.BusinessLogic.Interfaces;
 using WebApp.Domain.Entities.Comp;
 using WebApp.Domain.Entities.DatabaseTables;
+using WebApp.Filters;
 using WebApp.Models;
 
 namespace WebApp.Controllers
 {
+    [LoggedInFilter]
     public class DocumentationController : Controller
     {
         // GET: Documentation
@@ -30,25 +32,6 @@ namespace WebApp.Controllers
             var viewModelCards = Mapper.Map<List<CompCard>>(cards);
             return View(viewModelCards);
         }
-
-
-
-       /* [HttpPost]
-        public ActionResult Cards()
-        {
-            var userAPI = new UserAPI();
-            var cards = userAPI.GetCoCards(); // Obține lista de carduri mapată la CompCard
-
-            if (cards == null || !cards.Any())
-            {
-                ViewBag.Message = "No cards available to display.";
-                return View(new List<CompCard>()); // Trimite un model gol dacă nu există date
-            }
-
-            Console.WriteLine($"Number of cards found: {cards.Count}"); // Log pentru verificare
-            return View(cards); // Transmite modelul către view
-        }*/
-
 
     }
 }

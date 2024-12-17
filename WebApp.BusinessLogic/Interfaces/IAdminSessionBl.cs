@@ -12,6 +12,6 @@ namespace WebApp.BusinessLogic.Interfaces
     public interface IAdminSessionBl
     {
         ActionStatus RegisterNewCard(CoCard card, HttpPostedFileBase photofile, HttpPostedFileBase pdffile);
-
+        ActionStatus CreateNewUpdate(UpdateCard updateCard);
     }
 }

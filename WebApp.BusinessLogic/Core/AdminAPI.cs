@@ -8,6 +8,7 @@ using WebApp.BusinessLogic.DBModel;
 using WebApp.Domain.Entities.Comp;
 using WebApp.Domain.Entities.DatabaseTables;
 using WebApp.Domain.Entities.Response;
+using WebApp.Domain.Entities.User;
 
 namespace WebApp.BusinessLogic.Core
 {
@@ -83,6 +84,38 @@ namespace WebApp.BusinessLogic.Core
             }
         }
 
+        public ActionStatus CreateUpdateCard(UpdateCard updateCard)
+        {
+            try
+            {
+                using(var db = new CardContext())
+                {
+                    var update = db.Updates.Any(u => u.Title == updateCard.Title);
+                    if (update)
+                    {
+                        return new ActionStatus
+                        {
+                            IsSuccess = false,
+                            StatusMessage = "There is already an update with this title",
+                            SessionKey = "",
+                        };
+                    }
+                }
+
+                var new_update = Mapper.Map<UpdateCardDBTable>(updateCard);
+                using (var db = new CardContext())
+                {
+                    db.Updates.Add(new_update);
+                    db.SaveChanges();
+                }
+                return new ActionStatus { IsSuccess = true, StatusMessage = "200 OK", SessionKey = "" };
+
+            }
+            catch (Exception ex)
+            {
+                return new ActionStatus { IsSuccess = false, StatusMessage = $"An error occurred: {ex.Message}", SessionKey = "" };
+            }
+        }
 
 
        
